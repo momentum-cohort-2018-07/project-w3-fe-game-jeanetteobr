@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <script src="keyboarder.js"></script>
-</head>
-<body>
   
+  <title>Game</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+      /* background-color: white; */
+    }
+
+    #game {
+      margin:  150px auto;
+      width: 50%;
+    }
+
+    h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="game">
+    <h2>Space Invaders (?)</h2>
+    <canvas id="screen" height="500" width="500"></canvas>
+    <script src="keyboarder.js" ></script>
+  </div>
 </body>
+
 </html>
