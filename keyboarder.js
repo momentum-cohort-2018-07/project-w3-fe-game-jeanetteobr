@@ -12,19 +12,19 @@ const colors = {
 class Game {
   constructor() {
     this.player = new Player(this);
-  }
-  draw() {
-    context.fillRect(250, 450, 20, 20)
-    this.player.draw()
+    this.tick()
   }
   tick() {
     this.update()
     this.draw()
     requestAnimationFrame(() => this.tick())
   }
-
   update() {
     this.player.update()
+  }
+  draw() {
+    context.clearRect(0, 0, 500, 500)
+    this.player.draw()
   }
 }
 
@@ -34,15 +34,16 @@ class Player {
       x: screenSize.x / 2 - 10,
       y: 450
     }
-    this.playerSize = {
+    this.size = {
       x: 20,
       y: 20
     }
+    this.keyboarder = new Keyboarder();
     this.game = game
   }
   draw() {
-    this.game.context.fillStyle = colors.player
-    this.game.context.fillRect(this.center.x, this.center.y, this.playerSize.x, this.playerSize.y)
+    context.fillStyle = colors.player
+    context.fillRect(this.center.x, this.center.y, this.size.x, this.size.y)
   }
   update() {
     if (this.keyboarder.isDown(Keyboarder.KEYS.LEFT)) {
@@ -53,10 +54,13 @@ class Player {
       this.center.x += 2
       if (this.center.x >= 480) this.center.x = 480
     }
+    if (this.keyboarder.isDown(Keyboarder.KEYS.S)) {
+      this.game.bullets.push(new Bullet(this.center.x))
+    }
   }
 }
 
-class Keyboarder {
+class Keyboarder {  
   constructor() {
     this.keyState = {}
 
@@ -90,3 +94,4 @@ Keyboarder.KEYS = {
   S: 83
 }
 
+let game = new Game();
